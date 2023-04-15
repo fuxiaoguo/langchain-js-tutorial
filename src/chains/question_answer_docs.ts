@@ -17,7 +17,7 @@ export const run = async () => {
     });
 
     // retrieve API operations for index created in pinecone dashboard
-    const index = pinecone.Index("langchainjsfundamentals");
+    const index = pinecone.Index(process.env.PINECONE_INDEX || '');
 
     // crosscheck your index (that contains embeddings of your docs) exists in the vectorstore
     const indexData = await index.describeIndexStats({
@@ -27,9 +27,9 @@ export const run = async () => {
     console.log("indexData", indexData);
 
     const query = "How many new jobs did the economy create last year?";
-    const namespace = "test"; //change this to your own vectorbase namespace
+    const namespace = process.env.PINECONE_NAMESPACE || ''; //change this to your own vectorbase namespace
 
-    const response = await callVectorDBQAChain(query, index, namespace);
+    const response = await callVectorDBQAChain(query, index, namespace || '');
     console.log("answer", response);
     // { text: ' Over 6.5 million new jobs were created last year.' }
   } catch (error) {

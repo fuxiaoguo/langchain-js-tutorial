@@ -9,16 +9,14 @@ import path from "path";
  */
 
 export const run = async () => {
-  const text = `Hi.\n\nI'm Harrison.\n\nHow? Are? You?\nOkay then f f f f.
-    This is a weird text to write, but gotta test the splittingggg some how.\n\n
-    Bye!\n\n-H.`;
+  const text = '0123456789Language models limit the amount of text that you can send to them per request.';
   /**
    * Recursivecharactertextsplitter splits a document "recursively" using '\n\n'
    * then "\n" and finally " ".
    * It helps to ensure that chunks mantain relevancy.
    */
   const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 10, //max size(chars) of docs chunk
+    chunkSize: 11, //max size(chars) of docs chunk
     chunkOverlap: 1, //how much overlap betwen chunks
   });
   const output = splitter.createDocuments([text]);

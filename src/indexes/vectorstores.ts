@@ -39,7 +39,7 @@ export const run = async () => {
     const docs = textSplitter.createDocuments([text]);
 
     //retrieve API operations for index created in pinecone dashboard
-    const index = pinecone.Index("langchainjsfundamentals");
+    const index = pinecone.Index(process.env.PINECONE_INDEX || '');
 
     /*
     create embeddings to extract text from document and send to openAI for embeddings then
@@ -72,7 +72,7 @@ export const run = async () => {
           },
           values,
         })),
-        namespace: "test",
+        namespace: process.env.PINECONE_NAMESPACE,
       };
 
       await index.upsert({
